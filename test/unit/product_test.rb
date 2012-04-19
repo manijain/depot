@@ -3,20 +3,20 @@ require 'test_helper'
 class ProductTest < ActiveSupport::TestCase
   fixtures :products
   test "product attributes must not be empty" do
-   product = Product.new
-   assert product.invalid?
-   assert product.errors[:title].any?
-   assert product.errors[:description].any?
-   assert product.errors[:price].any?
-   assert product.errors[:image_url].any?
-end
+    product = Product.new
+    assert product.invalid?
+    assert product.errors[:title].any?
+    assert product.errors[:description].any?
+    assert product.errors[:price].any?
+    assert product.errors[:image_url].any?
+  end
 
 
 
   test "product price must be positive" do
     product = Product.new(title:       "My Book Title",
-                          description: "yyy",
-                          image_url:   "zzz.jpg")
+      description: "yyy",
+      image_url:   "zzz.jpg")
     product.price = -1
     assert product.invalid?
     assert_equal "must be greater than or equal to 0.01",
@@ -31,14 +31,41 @@ end
     assert product.valid?
   end
 
+  #   test "product price must be less than 1000.0" do
+  #    product = Product.new(title:       "My Book Title",
+  #                          description: "yyy",
+  #                          image_url:   "zzz.jpg")
+  #    product.price = 1005.00
+  #    assert product.invalid?
+  #    assert_equal "must be less than or equal to 1000.0",
+  #      product.errors[:price].join('; ')
+  #
+  #    product.price = 999.00
+  #    assert product.valid?
+  #   end
   
+  test "the image_url should be unique" do
+    product = Product.create(title: "My product title",
+      description: "zustegs",
+      price: 10.00,
+      image_url: "sdh.jpg")
+    assert product.save
+
+    product = Product.create(title: "sdsdfsdr",
+      description: "zustegs",
+      price: 10.00,
+      image_url: "sdh.jpg")
+    assert !product.save
+    assert_equal "has already been taken", product.errors[:image_url].join('; ')
+  end
 
   def new_product(image_url)
     Product.new(title:  "My Book Title",
       description: "yyy",
-      price:       1,
-      image_url:   image_url)
+      price:      1,
+      image_url:  image_url)
   end
+
 
   test "image url" do
     ok = %w{ fred.gif fred.jpg fred.png FRED.JPG FRED.Jpg
@@ -56,24 +83,15 @@ end
 
 
 
-   test "product is not valid without a unique title" do
+
+  test "product is not valid without a unique title" do
     product = Product.new(title: products(:ruby).title,
-                          description: "yyy",
-                          price:       1,
-                          image_url:   "fred.gif")
+      description: "yyy",
+      price:     1,
+      image_url:  "fred.gif")
+
     assert !product.save
     assert_equal "has already been taken", product.errors[:title].join('; ')
-  end
-
-   test "product is not valid without a unique title - i18n" do
-    product = Product.new(title: products(:ruby).title,
-                          description: "yyy",
-                          price:       1,
-                          image_url:   "fred.gif")
-
-    assert !product.save
-    assert_equal I18n.translate('activerecord.errors.messages.taken'),
-                 product.errors[:title].join('; ')
   end
 
 end

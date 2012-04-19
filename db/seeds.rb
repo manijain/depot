@@ -14,5 +14,9 @@ description:
 out there. If you need to get working programs delivered fast,
 you should add Ruby to your toolbox.
 </p>},
-  image_url: 'ruby.jpg',
+  image_url: '3.jpg',
   price: 49.95)
+
+PaymentType.create(:name => "Check")
+PaymentType.create(:name => "Credit card")
+PaymentType.create(:name => "Purchase order")

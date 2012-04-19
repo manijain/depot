@@ -1,0 +1,18 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  product_id: ruby
+  order: one
+
+two:
+  product_id: 1
+  cart_id: 1
+
+#excercise ch-10
+#one:
+#  product: ruby
+#  cart: one
+#
+#two:
+#   product: ruby
+#   cart: one
