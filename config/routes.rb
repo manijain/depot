@@ -1,4 +1,10 @@
 Depot::Application.routes.draw do
+
+
+  get '/questions',    to: 'static_pages#questions'
+  get '/news',         to: 'static_pages#news'
+  get '/contacts',     to: 'static_pages#contacts'
+
   get 'admin' => 'admin#index'
 
  controller :sessions do
