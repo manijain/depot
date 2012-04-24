@@ -16,3 +16,5 @@ you should add Ruby to your toolbox.
 </p>},
   image_url: '3.jpg',
   price: 49.95)
+
+User.create(name: 'admin', password: 'secret')
