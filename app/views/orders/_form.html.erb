@@ -32,7 +32,7 @@
   </div>
   <div class="field">
     <%= f.label :pay_type %><br />
-    <%= f.select :pay_type, PaymentType.names,
+    <%= f.select :pay_type, Order::PAYAMENT_TYPES,
                   prompt: t('.pay_prompt_html') %>
   </div>
   <div class="actions">

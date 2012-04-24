@@ -3,6 +3,9 @@ require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 
 class ActiveSupport::TestCase
+  Test < ActionController::IntegrationTest
+    fixtures :all
+
   def login_as(user)
     session[:user_id] = users(user).id
   end

@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 Product.delete_all
-Product.create(title: 'Programing ruby 1.9',
+Product.create(title: 'Programing Ruby 1.9',
 description:
  %{<p>
   Ruby is the fastest growing and most exciting dynamic language
@@ -16,7 +16,3 @@ you should add Ruby to your toolbox.
 </p>},
   image_url: '3.jpg',
   price: 49.95)
-
-PaymentType.create(:name => "Check")
-PaymentType.create(:name => "Credit card")
-PaymentType.create(:name => "Purchase order")

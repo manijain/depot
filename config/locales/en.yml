@@ -1,5 +1,3 @@
-# Sample localization file for English. Add more files in this directory for other locales.
-# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 en:
 
 
@@ -15,7 +13,7 @@ en:
   store:
     index:
       title_html: "Your Pragmatic Catalog"
-      addd_html:  "Add to Cart"
+      add_html:  "Add to Cart"
 
 
   carts:
@@ -38,13 +36,14 @@ en:
   orders:
     new:
       legend:      "Please Enter Your Details"
-      form:
-        name:            "Name"
-        address_html:    "Address"
-        email:           "E-mail"
-        pay_type:        "pay_with"
-        pay_prompt_html: "Select a payment method"
-        submit:          "Place order"
+    form:
+        name:                "Name"
+        address_html:        "Address"
+        email:               "E-mail"
+        pay_prompt_html:     "Select a payment method"
+        submit:              "Place order"
+
+
 
   thanks:               "Thank you for your order"
     

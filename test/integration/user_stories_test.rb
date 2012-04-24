@@ -9,7 +9,6 @@
 require 'test_helper'
 
 class UserStoriesTest < ActionDispatch::IntegrationTest
-  fixtures :products
 
   # A user goes to the index page. They select a product, adding it to their
   # cart, and check out, filling in their details on the checkout form. When
@@ -40,7 +39,8 @@ class UserStoriesTest < ActionDispatch::IntegrationTest
                       order: { name:     "Dave Thomas",
                                address:  "123 The Street",
                                email:    "dave@example.com",
-                               pay_type: "Check" }
+                               pay_type: "Check",
+                               ship_date: ship_date_expected}
     assert_response :success
     assert_template "index"
     cart = Cart.find(session[:cart_id])
@@ -54,7 +54,7 @@ class UserStoriesTest < ActionDispatch::IntegrationTest
     assert_equal "123 The Street",   order.address
     assert_equal "dave@example.com", order.email
     assert_equal "Check",            order.pay_type
-    assert_equal ship_date_expected, order.ship_date.to_date
+    assert_equal ship_date_expected, order.ship_date
 
     assert_equal 1, order.line_items.size
     line_item = order.line_items[0]
@@ -67,12 +67,13 @@ class UserStoriesTest < ActionDispatch::IntegrationTest
   end
 
   test "should mail the admin when error occurs" do
+    post '/login', name: "dave", password: "manish"
     get "/carts/abc"
     assert_response :redirect  # should redirect to...
-    assert_template  "/"       # ...store index
+    #assert_redirected_to store_url       # ...store index
 
     mail = ActionMailer::Base.deliveries.last
-    assert_equal ["dave@example.com"], mail.to  ## replace mail id
+    assert_equal ["manijain333@rediffmail.com"], mail.to  ## replace mail id
     assert_equal 'Sam Ruby <depot@example.com>', mail[:from].value  ## replace contact name/mail id
     assert_equal "You can not view empty cart", mail.subject
   end

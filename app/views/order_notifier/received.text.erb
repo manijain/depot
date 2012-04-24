@@ -1,7 +1,6 @@
 <%#= image_tag attachments['1.jpg'].url%>
+
 Dear <%= @order.name %>
 Thank you for your recent order from the Pragmatic Store.
 You ordered the following items:
-<%= render @order.line_items %>
-Your ship date is:
-<%= @order.ship_date %>
+<%= render @order.line_items %> 
